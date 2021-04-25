@@ -1,0 +1,15 @@
+{% extends 'super.html' %}
+{% block title %}
+<title>Добавить товар</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+<h1>Добавить товар</h1>
+<form method="post">
+<input type="text" class="form-control" name="title" id="title" placeholder="Введите название"><br>
+<input type="number" class="form-control" name="price" id="price" placeholder="Введите цену"><br>
+<input type="number" class="form-control" name="rest" id="rest" placeholder="Введите количество на складе"><br>
+<button class="btn btn-success" type="submit">Добавить товар</button>
+    </form>
+</div>
+{% endblock %}

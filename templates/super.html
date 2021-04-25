@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="icon" href="https://yt3.ggpht.com/ytc/AAUvwnh5XqoNsK2vP1KAmOoPQnBsAiaED9miqhL5jqRu=s900-c-k-c0x00ffffff-no-rj">
+  <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+{% block title %}{% endblock %}
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check" viewBox="0 0 16 16">
+      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+    </symbol>
+  </svg>
+
+  <div class="container py-3">
+    <header class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+        <img  src="https://gou619.kalin.gov.spb.ru/assets/images/news/2020_06/cropped-cube-logo-4.png" style="max-height: 60px;" alt="logo">
+        <span class="fs-4" style="font-size: 30px">CubeShop</span>
+      </a>
+
+      <nav class="my-3 my-md-o mr-md-3" style="margin-left: 30px">
+        <a class="p-2 text-dark" href="/">Каталог</a>
+        <a class="p-2 text-dark" href="/about">О нас</a>
+        <a class="p-2 text-dark" href="/where">Найти нас</a>
+        {% if current_user.is_authenticated %}
+        <a class="p-2 text-dark" href="/shopping">Корзина</a>
+        {% endif %}
+        {% if not current_user.is_authenticated %}
+        <a class="p-2 text-dark" href="/register">Регистрация</a>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+        {% if current_user.admin %}
+        <a class="p-2 text-dark" href="/make">Добавить товар</a>
+        <a class="p-2 text-dark" href="/api/products">Проверить все товары(API)</a>
+        {% endif %}
+        {% endif %}
+      </nav>
+      {% if not current_user.is_authenticated %}
+      <a class="btn btn-outline-primary" href="login" style="margin-left: 435px">Войти</a>
+      {% else %}
+      {% if current_user.admin %}
+      <a class="btn btn-outline-primary" href="logout" style="margin-left: 110px">Выйти</a>
+      {% else %}
+      <a class="btn btn-outline-primary" href="logout" style="margin-left: 465px">Выйти</a>
+      {% endif %}
+      {% endif %}
+    </header>
+    {% block body %}{% endblock %}
+  </div>
+</body>
+
+</html>

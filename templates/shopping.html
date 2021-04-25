@@ -1,0 +1,45 @@
+{% extends 'super.html' %}
+{% block title %}
+<title>Онлайн магазин</title>
+{% endblock %}
+{% block body %}
+ <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">КОРЗИНА</h1>
+    <p class="fs-5 text-muted">ТОВАРЫ ДОБАВЛЕННЫЕ В ВАШУ КОРЗИНУ</p>
+  </div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      {% for i in data %}
+      {% for j in good_s %}
+      {% if j.product_id == i.id %}
+      {% if j.user_id == user.id %}
+
+ <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">{{ i.title }}</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">{{ i.price }}<small class="text-muted fw-light">рублей</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>100% хлопок</li>
+              <li>Гарантия качества</li>
+              <li>Ручная работа</li>
+              <li>Произведено в России</li>
+            </ul>
+            <a href="/shopping_del/{{  i.id  }}" class="w-100 btn btn-lg btn-outline-primary">Удалить из корзины</a>
+                </div>
+          </div>
+        </div>
+        {% endif %}
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+
+</div>
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <a href="/pay" style="height = 280px" class="w-100 btn btn-lg btn-outline-primary">Оплатить</a>
+    </div>
+  </footer>
+</div>
+{% endblock %}

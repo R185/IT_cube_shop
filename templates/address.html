@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "super.html" %}
+{% block body %}
+<html lang="en">
+<head>
+    <!-- Подключаем API -->
+    <!-- Подробнее https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/load-docpage/ -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+<!-- Создаём контейнер для карты -->
+<div id="map" style="width: 1125px; height: 400px"></div>
+<!-- Создаём карту -->
+<script type="text/javascript">
+    ymaps.ready(init);
+    function init() {
+        var myMap = new ymaps.Map("map", {
+            center: [42.95526203275115, 47.49797868960464],
+            zoom: 17.5,
+            controls: [
+                'zoomControl',
+                'rulerControl',
+                'routeButtonControl',
+                'trafficControl',
+                'typeSelector',
+                'fullscreenControl',
+                new ymaps.control.SearchControl({
+                    options: {
+                        size: 'large',
+                        provider: 'yandex#search'
+                    }
+                })
+ 
+            ]
+        });
+        var myPlacemark = new ymaps.Placemark([42.95526203275115, 47.49797868960464], {
+            hintContent: 'Мы здесь!!!)',
+            // Балун откроется при клике по метке.
+            balloonContent: 'Cubeshop'
+        });
+        myMap.geoObjects.add(myPlacemark);
+    }
+</script>
+</body>
+</html>
+{% endblock %}
