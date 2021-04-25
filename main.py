@@ -1,5 +1,3 @@
-import os
-
 from flask import Flask, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import redirect
@@ -63,9 +61,10 @@ def cart_add(product_id):
     db_sess = db_session.create_session()
     user = db_sess.query(User).filter(User.email == session["email"]).first()
     item = db_sess.query(Item).filter(Item.id == product_id).first()
-    item.rest -= 1
-    good = goods(product_id=product_id, user_id=user.id)
-    db_sess.add(good)
+    if item.rest > 0:
+        good = goods(product_id=product_id, user_id=user.id)
+        db_sess.add(good)
+        item.rest -= 1
     db_sess.commit()
     return redirect("/")
 
@@ -160,8 +159,7 @@ def main():
     import products_api
     app.register_blueprint(products_api.blueprint)
     db_session.global_init("store.db")
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(port=8000, host='127.0.0.1', debug=True)
 
 
 if __name__ == '__main__':
