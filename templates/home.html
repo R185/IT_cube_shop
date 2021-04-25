@@ -26,7 +26,6 @@
             </ul>
             {% if current_user.is_authenticated %}
             <a href="/shopping_add/{{ i.id }}" class="w-100 btn btn-lg btn-outline-primary">В корзину</a>
-
             {% else %}
             <a class="w-100 btn btn-lg btn-outline-primary">В корзину</a>
               <div class="alert alert-danger" role="alert">
@@ -35,11 +34,10 @@
                     </p>
                 </div>
             {% endif %}
-            {% endif %}
           </div>
         </div>
 </div>
-
+       {% endif %}
       {% endfor %}
 </div>
 {% endblock %}
